@@ -1,20 +1,20 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Annotation } from './annotation.model';
+import { HttpClient } from '@angular/common/http';
 
 const PROTOCOL = 'http';
 const PORT = 3500;
 
-@Injectable()
+@Injectable({
+  providedIn: 'root',
+})
 export class RestDataSource {
   baseUrl: string = `http://localhost:${PORT}/`;
-  auth_token?: string;
-
-  constructor(private http: HttpClient) {}
+  private http = inject(HttpClient);
 
   get annotations(): Observable<Annotation[]> {
-    return this.http.get<Annotation[]>(this.baseUrl + 'annotations');
+    return this.http.get<Annotation[]>(this.baseUrl + 'pages');
   }
 
   saveAnnotation(annotation: Annotation): Observable<Annotation> {
@@ -23,12 +23,12 @@ export class RestDataSource {
 
   updateAnnotation(annotation: Annotation): Observable<Annotation> {
     return this.http.put<Annotation>(
-      `${this.baseUrl}annotations/${annotation.id}`,
+      `${this.baseUrl}annotations/${annotation.number}`,
       annotation,
     );
   }
 
-  deleteAnnotation(id: number): Observable<Annotation> {
-    return this.http.delete<Annotation>(`${this.baseUrl}annotations/${id}`);
+  deleteAnnotation(number: number): Observable<Annotation> {
+    return this.http.delete<Annotation>(`${this.baseUrl}annotations/${number}`);
   }
 }

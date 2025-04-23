@@ -1,51 +1,46 @@
-import { Injectable, Signal, computed, signal } from '@angular/core';
-import { Annotation } from './annotation';
+import { Injectable, signal } from '@angular/core';
+import { Annotation } from './annotation.model';
 import { RestDataSource } from './rest.datasource';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root',
+})
 export class AnnotationRepository {
-  products = signal<Annotation[]>([]);
-  categories: Signal<string[]>;
+  annotations = signal<Annotation[]>([]);
 
   constructor(private dataSource: RestDataSource) {
-    dataSource.products.subscribe((data) => {
-      this.products.set(data);
-    });
-    this.categories = computed(() => {
-      return this.products()
-        .map((p) => p.category ?? '(None)')
-        .filter((c, index, array) => array.indexOf(c) == index)
-        .sort();
+    this.dataSource.annotations.subscribe((data) => {
+      this.annotations.set(data);
     });
   }
 
-  getAnnotation(id: number): Annotation | undefined {
-    return this.products().find((p) => p.id == id);
+  getAnnotation(number: number): Annotation | undefined {
+    return this.annotations().find((p) => p.number == number);
   }
 
-  saveAnnotation(product: Annotation) {
-    if (product.id == null || product.id == 0) {
-      this.dataSource.saveAnnotation(product).subscribe((p) => {
-        // this.products.mutate((pdata) => pdata.push(p));
+  saveAnnotation(annotation: Annotation) {
+    if (annotation.number == null || annotation.number == 0) {
+      this.dataSource.saveAnnotation(annotation).subscribe((p) => {
+        // this.annotations.mutate((pdata) => pdata.push(p));
       });
     } else {
-      this.dataSource.updateAnnotation(product).subscribe((p) => {
-        // this.products.mutate((pdata) => {
+      this.dataSource.updateAnnotation(annotation).subscribe((p) => {
+        // this.annotations.mutate((pdata) => {
         //   pdata.splice(
-        //     pdata.findIndex((p) => p.id == product.id),
+        //     pdata.findIndex((p) => p.number == annotation.number),
         //     1,
-        //     product,
+        //     annotation,
         //   );
         // });
       });
     }
   }
 
-  deleteAnnotation(id: number) {
-    this.dataSource.deleteAnnotation(id).subscribe((p) => {
-      // this.products.mutate((pdata) => {
+  deleteAnnotation(number: number) {
+    this.dataSource.deleteAnnotation(number).subscribe((p) => {
+      // this.annotations.mutate((pdata) => {
       //   pdata.splice(
-      //     pdata.findIndex((p) => p.id == id),
+      //     pdata.findIndex((p) => p.number == number),
       //     1,
       //   );
       // });
