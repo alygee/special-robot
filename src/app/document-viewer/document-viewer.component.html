@@ -1,1 +1,7 @@
-<p>document-viewer works!</p>
+@if (annotation()) {
+  <img
+    class="image"
+    [src]="annotation()?.imageUrl"
+    [alt]="annotation()?.imageUrl"
+  />
+}
