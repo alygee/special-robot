@@ -1,0 +1,23 @@
+<table
+  tuiTable
+  size="l"
+  class="table"
+  [columns]="columns"
+  [style.width.%]="100"
+>
+  <thead>
+    <tr tuiThGroup>
+      <th tuiTh [resizable]="true">Number</th>
+      <th tuiTh>imageUrl</th>
+    </tr>
+  </thead>
+  <tbody tuiTbody [data]="data">
+    <tr *ngFor="let item of data" tuiTr>
+      <td *tuiCell="'imageUrl'" tuiTd>
+        <a tuiLink routerLink="1">
+          {{ item.imageUrl }}
+        </a>
+      </td>
+    </tr>
+  </tbody>
+</table>

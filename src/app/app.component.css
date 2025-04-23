@@ -1,0 +1,13 @@
+@import "@taiga-ui/core/styles/taiga-ui-local.less";
+
+.default-layout {
+  max-width: 768px;
+  margin: 1rem auto;
+}
+
+header {
+  padding: 1rem;
+  border: 1px solid var(--tui-border-normal);
+  border-radius: var(--tui-radius-l);
+  margin-bottom: 1rem;
+}
