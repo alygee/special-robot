@@ -4,6 +4,6 @@ import { DocumentViewerComponent } from './document-viewer/document-viewer.compo
 
 export const routes: Routes = [
   { path: 'home', component: HomeComponent },
-  { path: 'annotation/:id', component: DocumentViewerComponent },
-  { path: '**', redirectTo: '/home' },
+  { path: 'page/:id', component: DocumentViewerComponent },
+  { path: '**', redirectTo: '/page/1' },
 ];

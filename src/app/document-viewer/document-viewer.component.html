@@ -1,7 +1,19 @@
-@if (annotation()) {
-  <img
-    class="image"
-    [src]="annotation()?.imageUrl"
-    [alt]="annotation()?.imageUrl"
-  />
-}
+<div class="controls">
+  <button (click)="zoomOut()">-</button>
+  <span>{{ zoom }}x</span>
+  <button (click)="zoomIn()">+</button>
+  <button (click)="save()">Сохранить</button>
+  <button (click)="addAnnotation('text')">Add Text</button>
+  <input type="file" accept="image/*" (change)="onFileSelected($event)" />
+  <button (click)="save()">Save</button>
+</div>
+<div class="pages" style="position: relative">
+  <div *ngFor="let page of pages">
+    <img [src]="page.imageUrl" [style.transform]="'scale(' + zoom + ')'" />
+  </div>
+  <app-annotation *ngFor="let a of annotations"
+                  [annotation]="a"
+                  (remove)="removeAnnotation(a.id)"
+                  (dragged)="updatePosition(a.id, $event.x, $event.y)"
+                  (contentChange)="updateContent(a.id, $event)"></app-annotation>
+</div>

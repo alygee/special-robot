@@ -1,0 +1,8 @@
+.annotation {
+  position: absolute;
+  background: yellow;
+  padding: 5px;
+  border: 1px solid #ccc;
+  cursor: move;
+  user-select: none;
+}

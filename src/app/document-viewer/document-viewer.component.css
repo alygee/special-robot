@@ -2,3 +2,59 @@
   object-fit: cover;
   width: 100%;
 }
+
+.controls {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 15px;
+  align-items: center;
+  z-index: 10;
+  position: relative;
+}
+
+.controls button {
+  padding: 6px 12px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.document {
+  overflow-x: auto;
+  overflow-y: auto;
+}
+
+.page-container {
+  position: relative;
+  transform-origin: top left;
+  transition: transform 0.2s ease;
+}
+
+.page img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  border: 1px solid #ddd;
+}
+
+.annotation {
+  position: absolute;
+  background: yellow;
+  padding: 5px;
+  border: 1px solid #ccc;
+  cursor: move;
+  user-select: none;
+}
+
+.annotation img {
+  max-width: 100px;
+  max-height: 100px;
+}
+
+.annotation button {
+  background: none;
+  border: none;
+  color: red;
+  font-weight: bold;
+  cursor: pointer;
+  margin-left: 5px;
+}
