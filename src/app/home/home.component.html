@@ -11,10 +11,10 @@
       <th tuiTh>imageUrl</th>
     </tr>
   </thead>
-  <tbody tuiTbody [data]="annotations()">
-    <tr *ngFor="let item of annotations()" tuiTr>
+  <tbody tuiTbody [data]="pages()">
+    <tr *ngFor="let item of pages()" tuiTr>
       <td *tuiCell="'imageUrl'" tuiTd>
-        <a tuiLink [routerLink]="['/annotation', item.number]">
+        <a tuiLink [routerLink]="['/page', item.number]">
           {{ item.imageUrl }}
         </a>
       </td>

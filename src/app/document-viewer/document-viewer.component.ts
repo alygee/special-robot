@@ -1,7 +1,6 @@
 import { ChangeDetectionStrategy, Component, computed } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { AnnotationRepository } from '../model/annotation.repository';
-import { Annotation } from '../model/annotation.model';
+import { PageRepository } from '../model/page.repository';
 
 @Component({
   selector: 'app-document-viewer',
@@ -11,19 +10,12 @@ import { Annotation } from '../model/annotation.model';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DocumentViewerComponent {
-  annotation = computed(() => this.repository.annotation());
+  page = computed(() => this.repository.page());
 
   constructor(
-    private repository: AnnotationRepository,
+    private repository: PageRepository,
     private route: ActivatedRoute,
   ) {
-    repository.getAnnotation(route.snapshot.params['id']);
-  }
-
-  ngOnInit(): void {
-    // this.repository.getAnnotation(this.annotationId).subscribe({
-    //   next: (annotation) => (this.annotation = annotation),
-    //   error: (err) => console.error('Ошибка при получении аннотации', err),
-    // });
+    repository.getPage(route.snapshot.params['id']);
   }
 }
