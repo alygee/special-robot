@@ -3,7 +3,7 @@
 Тестовое задание для ClearWay
 
 
-Демо [clearwaytest.netlify.app](clearwaytest.netlify.app)
+Демо [clearwaytest.netlify.app](https://clearwaytest.netlify.app/)
 
 ## Цель
 
